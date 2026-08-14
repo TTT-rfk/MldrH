@@ -13,10 +13,10 @@ Use this document when giving the extracted `MldrH-release` folder to another co
 
 Configure MldrH so that:
 
-- `models/BAAI-bge-m3` contains the public BAAI/bge-m3 base model.
-- `models/Mdlr-theory-embed-v1` contains the supplied LoRA adapter.
-- `knowledge_db_theory_v1` contains a compatible Chroma collection named `theory_knowledge`.
-- Ollama serves the separately obtained Mdlr generation model.
+- `base_model` points to the public BAAI/bge-m3 base model.
+- `adapter_path` points to the separately released Mdlr theory LoRA adapter.
+- `database_path` points to a compatible Chroma collection named `theory_knowledge`.
+- Ollama serves an Mdlr generation model imported from the official Mdlr model project.
 - `.venv` contains the packages from `requirements.txt`.
 
 ## Required Steps
@@ -24,10 +24,10 @@ Configure MldrH so that:
 1. Read `INSTALL.md` and check every dependency path before editing any configuration.
 2. Create `.venv` with Python 3.11 or newer and install `requirements.txt`.
 3. Copy `config.example.json` to `config.json` only when it does not already exist.
-4. Download the public BAAI/bge-m3 model from the link in `INSTALL.md` into `models/BAAI-bge-m3`.
-5. Obtain the separately released adapter and place it in `models/Mdlr-theory-embed-v1`.
-6. Ask the user to provide or build a lawful compatible Chroma knowledge base. MldrH cannot retrieve without it.
-7. Install Ollama from its official website and ask the user to import or pull the separately distributed Mdlr generation model.
+4. Download the public BAAI/bge-m3 model from the link in `INSTALL.md`, then enter its full extracted folder path as `base_model`.
+5. Obtain the separately released adapter, verify `adapter_model.safetensors` exists, then enter its full folder path as `adapter_path`.
+6. Download the Mdlr GGUF from https://github.com/TTT-rfk/Mdlr1.0-Qwen2.5-3B using its ModelScope link. Use that repository's `Modelfile` with `ollama create`, then set `generation_model` to the exact `ollama list` tag.
+7. Obtain the compatible vector database linked from the Mdlr model repository, verify `chroma.sqlite3` exists, then set `database_path` and `collection_name`.
 8. Run `MldrH.bat` and resolve only the displayed error code.
 
 ## Do Not Invent Missing Assets

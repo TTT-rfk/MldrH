@@ -65,7 +65,19 @@ Do not place the base model inside the adapter folder.
 
 ## 5. Install the Mdlr Generation Model
 
-Install Ollama, start it, then obtain the separately distributed `Mdlr1.0-Qwen2.5-3B` Ollama model. The default expected tag is:
+Download the Mdlr model from [TTT-rfk/Mdlr1.0-Qwen2.5-3B](https://github.com/TTT-rfk/Mdlr1.0-Qwen2.5-3B). Its README links the public ModelScope files:
+
+- Q8_0 GGUF, about 3.3 GB, recommended on most consumer GPUs.
+- F16 GGUF, about 6.2 GB, higher disk and VRAM use.
+
+Install Ollama, start it, then use the `Modelfile` from that repository to import the downloaded GGUF. From the folder containing the model repository's `Modelfile` and GGUF file, run:
+
+```powershell
+ollama create Mdlr1.0-Qwen2.5-3B -f Modelfile
+ollama run Mdlr1.0-Qwen2.5-3B
+```
+
+Set `generation_model` in `config.json` to the exact tag printed by `ollama list`. The default expected tag is:
 
 ```text
 Mdlr1.0-Qwen2.5-3B:f16
@@ -79,7 +91,7 @@ ollama list
 
 ## 6. Provide a Compatible Knowledge Base
 
-MldrH does not ship the theory corpus or Chroma database. Obtain or build a lawful compatible Chroma database, then set its folder as `database_path`. It must contain a Chroma collection named `theory_knowledge` unless you changed `collection_name`. Without this asset, MldrH will show a startup error rather than silently answer without retrieval.
+MldrH does not ship the theory corpus or Chroma database. The matching standard vector-database project is linked from the [Mdlr model repository](https://github.com/TTT-rfk/Mdlr1.0-Qwen2.5-3B). Obtain or build a lawful compatible Chroma database, then set its folder as `database_path`. It must contain a Chroma collection named `theory_knowledge` unless you changed `collection_name`. Without this asset, MldrH will show a startup error rather than silently answer without retrieval.
 
 ## 7. Launch
 

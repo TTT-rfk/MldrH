@@ -47,9 +47,9 @@ MldrH is intentionally a source and configuration release. It does **not** inclu
 You need to obtain and configure:
 
 - Public embedding base model: [BAAI/bge-m3 on Hugging Face](https://huggingface.co/BAAI/bge-m3) or [ModelScope](https://modelscope.cn/models/BAAI/bge-m3).
-- A separately distributed Mdlr Ollama generation model.
+- Mdlr generation model: [TTT-rfk/Mdlr1.0-Qwen2.5-3B](https://github.com/TTT-rfk/Mdlr1.0-Qwen2.5-3B), with Q8_0 and F16 GGUF downloads hosted on [ModelScope](https://modelscope.cn/models/huanxiang731/Mdlr1.0-Qwen2.5-3B).
 - A separately distributed Mdlr theory embedding adapter.
-- A lawful compatible Chroma knowledge base with the configured collection name.
+- A lawful compatible Chroma knowledge base with the configured collection name. The matching standard vector-database project is linked from the [Mdlr model repository](https://github.com/TTT-rfk/Mdlr1.0-Qwen2.5-3B).
 
 This separation keeps the repository small, reproducible, and free of private corpus material.
 
