@@ -6,7 +6,7 @@ MldrH is a local Marxist theory research terminal for the `Mdlr1.0-Qwen2.5-3B` O
 
 - MldrH Windows terminal and launcher.
 - The system prompt and a portable configuration template.
-- Adapter placement instructions and runtime files. The adapter binary is not included in this first source release.
+- The verified `Mdlr-theory-embed-v1` LoRA adapter and runtime files.
 - Installation, configuration, troubleshooting, and AI-assisted setup instructions.
 
 ## What Is Not Included
@@ -16,14 +16,14 @@ The repository intentionally does not distribute:
 - Mdlr generation-model weights.
 - BAAI/bge-m3 base-model weights.
 - The private theory vector database or its source corpus.
-- The `Mdlr-theory-embed-v1` adapter binary, pending a separately reviewed adapter release.
+- The Chroma database binary files. They are distributed as the `v1.0.0` GitHub Release asset.
 - Training data, build logs, cache files, API keys, tokens, passwords, or user conversations.
 
 You must obtain the public model dependencies and prepare a compatible knowledge base before MldrH can answer with retrieval.
 
 ## Quick Start
 
-Read [INSTALL.md](INSTALL.md) from top to bottom, then launch `MldrH.bat`.
+Read [INSTALL.md](INSTALL.md) from top to bottom. After placing the public BGE-M3 base model and importing the Mdlr Ollama model, run `setup_mldrh.ps1`, then launch `MldrH.bat`.
 
 ## Main Commands
 

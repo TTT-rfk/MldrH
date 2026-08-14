@@ -14,8 +14,8 @@ Use this document when giving the extracted `MldrH-release` folder to another co
 Configure MldrH so that:
 
 - `base_model` points to the public BAAI/bge-m3 base model.
-- `adapter_path` points to the separately released Mdlr theory LoRA adapter.
-- `database_path` points to a compatible Chroma collection named `theory_knowledge`.
+- `adapter_path` points to the bundled Mdlr theory LoRA adapter.
+- `database_path` points to the downloaded `v1.0.0` Chroma collection named `theory_knowledge`.
 - Ollama serves an Mdlr generation model imported from the official Mdlr model project.
 - `.venv` contains the packages from `requirements.txt`.
 
@@ -25,9 +25,9 @@ Configure MldrH so that:
 2. Create `.venv` with Python 3.11 or newer and install `requirements.txt`.
 3. Copy `config.example.json` to `config.json` only when it does not already exist.
 4. Download the public BAAI/bge-m3 model from the link in `INSTALL.md`, then enter its full extracted folder path as `base_model`.
-5. Obtain the separately released adapter, verify `adapter_model.safetensors` exists, then enter its full folder path as `adapter_path`.
+5. Verify the bundled `adapter\adapter_model.safetensors` file exists.
 6. Download the Mdlr GGUF from https://github.com/TTT-rfk/Mdlr1.0-Qwen2.5-3B using its ModelScope link. Use that repository's `Modelfile` with `ollama create`, then set `generation_model` to the exact `ollama list` tag.
-7. Obtain the compatible vector database linked from the Mdlr model repository, verify `chroma.sqlite3` exists, then set `database_path` and `collection_name`.
+7. Run `setup_mldrh.ps1`. It downloads the verified `v1.0.0` theory database Release asset, writes `config.json`, and verifies `theory_knowledge` has 5659 entries.
 8. Run `MldrH.bat` and resolve only the displayed error code.
 
 ## Do Not Invent Missing Assets

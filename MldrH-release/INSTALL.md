@@ -33,8 +33,8 @@ Open `config.json` and fill every empty string. This release intentionally conta
 | Field | What to enter | How to verify |
 |---|---|---|
 | `base_model` | Full folder path containing the downloaded `BAAI/bge-m3` files. | The folder contains `pytorch_model.bin`. |
-| `adapter_path` | Full folder path containing the separately released Mldr theory adapter. | The folder contains `adapter_model.safetensors`. |
-| `database_path` | Full folder path of your compatible Chroma database. | The folder contains `chroma.sqlite3`. |
+| `adapter_path` | Full folder path containing the bundled Mldr theory adapter. | The folder contains `adapter_model.safetensors`. |
+| `database_path` | Full folder path of the v1.0.0 Chroma database. | The folder contains `chroma.sqlite3`. |
 | `collection_name` | Chroma collection name. | Default is `theory_knowledge`. Change only if your database uses another name. |
 | `ollama_url` | Usually `http://localhost:11434`. | Open `http://localhost:11434/api/tags` after starting Ollama. |
 | `generation_model` | The exact tag shown by `ollama list`. | Example only: `Mdlr1.0-Qwen2.5-3B:f16`. |
@@ -89,11 +89,21 @@ If you have a GGUF model file, import it with a Modelfile supplied by the model 
 ollama list
 ```
 
-## 6. Provide a Compatible Knowledge Base
+## 6. Run Automatic Configuration
 
-MldrH does not ship the theory corpus or Chroma database. The matching standard vector-database project is linked from the [Mdlr model repository](https://github.com/TTT-rfk/Mdlr1.0-Qwen2.5-3B). Obtain or build a lawful compatible Chroma database, then set its folder as `database_path`. It must contain a Chroma collection named `theory_knowledge` unless you changed `collection_name`. Without this asset, MldrH will show a startup error rather than silently answer without retrieval.
+After BGE-M3 is in `assets\BAAI-bge-m3` and the Mdlr model is imported into Ollama, run:
 
-## 7. Launch
+```powershell
+.\setup_mldrh.ps1
+```
+
+The script installs Python dependencies, downloads the verified MldrH `v1.0.0` database Release asset, extracts it, writes `config.json`, and verifies collection `theory_knowledge` contains 5659 entries.
+
+## 7. Included Theory Knowledge Base
+
+The current MldrH database is distributed as the `MldrH-theory-knowledge-db-v1.zip` asset attached to the [MldrH v1.0.0 Release](https://github.com/TTT-rfk/MldrH/releases/tag/v1.0.0). It contains collection `theory_knowledge` with 5659 theory chunks and is built for the bundled Mdlr embedding adapter. Do not substitute the older `theory_docs` database from `Mdlr1.0-Qwen2.5-3B-vector-db`.
+
+## 8. Launch
 
 Double-click:
 

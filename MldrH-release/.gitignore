@@ -7,7 +7,6 @@ __pycache__/
 .env
 .env.*
 knowledge_db*/
-models/BAAI-bge-m3/
-models/Mdlr1.0-Qwen2.5-3B*/
+assets/BAAI-bge-m3/
 *.bin
 *.gguf
