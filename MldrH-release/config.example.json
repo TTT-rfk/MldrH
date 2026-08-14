@@ -1,0 +1,8 @@
+{
+  "base_model": "",
+  "adapter_path": "",
+  "database_path": "",
+  "collection_name": "theory_knowledge",
+  "ollama_url": "http://localhost:11434",
+  "generation_model": ""
+}
