@@ -1,6 +1,6 @@
 # MldrH
 
-**MldrH** is a local Marxist theory research terminal designed for the Mdlr model family and Ollama. It combines CPU retrieval with GPU generation, keeps theory materials inspectable, and provides a restrained command-line workbench for direct questions, comparison, text analysis, focused re-answers, and research outlines.
+**MldrH** is a local Marxist theory research terminal designed for the Mdlr model family . It combines CPU retrieval with GPU generation, keeps theory materials inspectable, and provides a restrained command-line workbench for direct questions, comparison, text analysis, focused re-answers, and research outlines.
 
 > Complex topics are more stable when asked step by step.
 
