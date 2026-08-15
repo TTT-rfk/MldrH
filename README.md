@@ -6,7 +6,7 @@
 
 ## What It Does
 
-- Runs locally on Windows with Ollama generation and CPU retrieval.
+- Runs locally on Windows  generation and CPU retrieval.
 - Retrieves theory materials through `BAAI/bge-m3` plus an Mdlr theory embedding adapter.
 - Streams answers directly in the terminal.
 - Keeps retrieval transparent with `/sources`.
