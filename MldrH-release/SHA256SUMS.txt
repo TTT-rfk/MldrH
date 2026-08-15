@@ -1,0 +1,2 @@
+﻿# Final v1.1.0 asset checksums are released separately as SHA256SUMS-v1.1.0.txt.
+# This repository file is not an asset checksum manifest.

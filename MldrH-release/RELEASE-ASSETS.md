@@ -1,19 +1,22 @@
-# MldrH v1.0.0 Release Assets
+# MldrH v1.1.0 Release Assets
 
-## Bundled Adapter
+## Terminal Package
 
-- Path: `adapter/`
-- Required file: `adapter_model.safetensors`
-- Files: 11
-- Total size: 36,464,406 bytes
-- `adapter_model.safetensors` SHA-256: `f10536bea1e3026cb4d22d5bb0678b706718aaf10d7575f83d21b7968dc7836f`
+- Asset: `MldrH-release-v1.1.0.zip`
+- Includes: portable terminal, both adapters, prompt files, installer, documentation, and hash manifest.
+- Does not include: public base weights, raw corpora, staged vectors, or database files.
 
-## Database Release Asset
+## Bundled Adapters
 
-- Asset: `MldrH-theory-knowledge-db-v1.zip`
-- SHA-256: `11ea7f8d099b9550dd62e0adf1a90758028f265a6bb6624fd34392696d19aab3`
+- Generation: `adapters/Mdlr1.1-think/adapter_model.safetensors`
+- Retrieval: `adapters/Mdlr-theory-embed-v1/adapter_model.safetensors`
+
+## PT-only Database Asset
+
+- Asset: `MldrH-theory-knowledge-db-v1.1.0.zip`
 - Extracted folder: `knowledge_db_theory_v1`
 - Collection: `theory_knowledge`
-- Entries: 5659
+- Entries: 5089
+- Allowed metadata type: `pt` only
 
-The database is paired with the bundled `Mdlr-theory-embed-v1` adapter. Do not substitute the older `theory_docs` database from `Mdlr1.0-Qwen2.5-3B-vector-db`.
+Download `SHA256SUMS-v1.1.0.txt` from the matching GitHub Release to verify all assets before extraction.

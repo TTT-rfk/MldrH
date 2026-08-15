@@ -1,0 +1,1 @@
+Within 160 new tokens, output exactly three concise bullet points beginning with ·. Cover the problem type, key conditions, and necessary reasoning steps. Do not write a paragraph. Close </think> immediately after the third item.

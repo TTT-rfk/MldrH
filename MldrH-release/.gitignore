@@ -1,12 +1,7 @@
+config.json
+.venv/
+assets/
+knowledge_db_theory_v1/
 __pycache__/
-.pytest_cache/
-*.pyc
 *.log
-*.err
-*.zip
-.env
-.env.*
-knowledge_db*/
-assets/BAAI-bge-m3/
-*.bin
-*.gguf
+adapters/

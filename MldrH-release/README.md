@@ -1,44 +1,32 @@
-# MldrH
+# MldrH v1.1
 
-MldrH is a local Marxist theory research terminal for the `Mdlr1.0-Qwen2.5-3B` Ollama model. It retrieves theory materials on CPU with the `Mdlr-theory-embed-v1` LoRA adapter and generates answers with Ollama on GPU.
+MldrH is a local Marxist theory research terminal. It retrieves PT theory material on CPU with `BAAI/bge-m3 + Mdlr-theory-embed-v1` and generates locally with `Qwen2.5-3B-Instruct + Mdlr1.1-think` through Transformers and PEFT.
 
-## What Is Included
+## v1.1 Changes
 
-- MldrH Windows terminal and launcher.
-- The system prompt and a portable configuration template.
-- The verified `Mdlr-theory-embed-v1` LoRA adapter and runtime files.
-- Installation, configuration, troubleshooting, and AI-assisted setup instructions.
+- Replaced Ollama/GGUF generation with local Transformers + PEFT CUDA BF16 inference.
+- Added Mdlr1.1-think, two-stage Think/Answer generation, and CPU-offloaded KV cache.
+- Added a terminal editor with normal cursor editing, history, mouse caret placement, Ctrl+C interruption, and `/clear` session clearing.
+- Updated the database asset to 5089 PT-only records. Conversational SFT vectors are excluded.
 
-## What Is Not Included
+## Included
 
-The repository intentionally does not distribute:
+- `MldrH.py` and `MldrH.bat`.
+- `adapters/Mdlr1.1-think` generation LoRA adapter.
+- `adapters/Mdlr-theory-embed-v1` retrieval LoRA adapter.
+- Prompt files, setup script, configuration template, and agent-readable setup instructions.
 
-- Mdlr generation-model weights.
-- BAAI/bge-m3 base-model weights.
-- The private theory vector database or its source corpus.
-- The Chroma database binary files. They are distributed as the `v1.0.0` GitHub Release asset.
-- Training data, build logs, cache files, API keys, tokens, passwords, or user conversations.
+## Not Included
 
-You must obtain the public model dependencies and prepare a compatible knowledge base before MldrH can answer with retrieval.
+- Qwen2.5-3B-Instruct or BAAI/bge-m3 base weights.
+- Raw PT/SFT corpora or staged conversational SFT vectors.
+- The database itself; download it as the matching v1.1 Release asset.
+- Local paths, `config.json`, virtual environments, cache files, logs, credentials, tokens, and conversations.
 
 ## Quick Start
 
-Read [INSTALL.md](INSTALL.md) from top to bottom. After placing the public BGE-M3 base model and importing the Mdlr Ollama model, run `setup_mldrh.ps1`, then launch `MldrH.bat`.
-
-## Main Commands
-
-| Command | Purpose |
-|---|---|
-| `/sources` | View the theory materials retrieved for the previous answer. |
-| `/continue [focus]` | Expand the previous answer in a specified direction. |
-| `/suggest` | Show three follow-up question directions without calling the model. |
-| `/focus [focus]` | Re-answer the previous question while focusing on one angle. |
-| `/outline [topic]` | Generate a question-shaped research or writing outline. |
-| `/compare A | B` | Compare two concepts, theories, or views. |
-| `/analyze [text]` | Analyze a text's concepts, argument, stance, and open questions. |
-| `/status` | Show active model, retrieval, and generation status. |
-| `/help` | Show all available commands. |
+Run `setup_mldrh.ps1`, then run `MldrH.bat`. Read [INSTALL.md](INSTALL.md) for requirements and [AI_SETUP.md](AI_SETUP.md) for safe agent automation.
 
 ## License
 
-Code in this repository is released under the MIT License. Model and adapter files retain their respective upstream or training-output terms.
+Code is released under the MIT License. Adapter files retain their upstream and training-output terms.

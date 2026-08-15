@@ -1,131 +1,55 @@
-# Install MldrH on Windows
+# Install MldrH v1.1 on Windows
 
-## 1. Prerequisites
+## Requirements
 
-Install these official dependencies first:
+- Windows 10 or later.
+- Python 3.11 or later.
+- A CUDA-capable GPU supporting BF16. Qwen2.5-3B BF16 requires about 8GB VRAM; CPU-offloaded KV cache reduces generation peak pressure but system memory is also required.
+- Internet access to ModelScope for public base model downloads and GitHub for the v1.1 database asset.
 
-- Python 3.11 or newer: https://www.python.org/downloads/windows/
-- Ollama for Windows: https://ollama.com/download/windows
-- Git for Windows, optional but recommended: https://git-scm.com/download/win
+## Automatic Setup
 
-Open PowerShell in the extracted MldrH folder after installation.
-
-## 2. Create the Python Environment
-
-```powershell
-py -3.11 -m venv .venv
-.\.venv\Scripts\python.exe -m pip install --upgrade pip
-.\.venv\Scripts\python.exe -m pip install -r requirements.txt
-```
-
-If `py -3.11` is unavailable, replace it with the full path to a Python 3.11+ executable.
-
-## 3. Configure Paths
-
-Copy the template once:
-
-```powershell
-Copy-Item config.example.json config.json
-```
-
-Open `config.json` and fill every empty string. This release intentionally contains no machine-specific path, model, adapter, or knowledge-base asset.
-
-| Field | What to enter | How to verify |
-|---|---|---|
-| `base_model` | Full folder path containing the downloaded `BAAI/bge-m3` files. | The folder contains `pytorch_model.bin`. |
-| `adapter_path` | Full folder path containing the bundled Mldr theory adapter. | The folder contains `adapter_model.safetensors`. |
-| `database_path` | Full folder path of the v1.0.0 Chroma database. | The folder contains `chroma.sqlite3`. |
-| `collection_name` | Chroma collection name. | Default is `theory_knowledge`. Change only if your database uses another name. |
-| `ollama_url` | Usually `http://localhost:11434`. | Open `http://localhost:11434/api/tags` after starting Ollama. |
-| `generation_model` | The exact tag shown by `ollama list`. | Example only: `Mdlr1.0-Qwen2.5-3B:f16`. |
-
-Example only. Do not copy these paths unless they exist on your computer:
-
-```json
-{
-  "base_model": "D:\\Models\\BAAI-bge-m3",
-  "adapter_path": "D:\\Models\\Mdlr-theory-embed-v1",
-  "database_path": "D:\\Data\\knowledge_db_theory_v1",
-  "collection_name": "theory_knowledge",
-  "ollama_url": "http://localhost:11434",
-  "generation_model": "Mdlr1.0-Qwen2.5-3B:f16"
-}
-```
-
-## 4. Download the Public Embedding Base Model
-
-Download `BAAI/bge-m3` from one of these public sources, extract it anywhere on your computer, then set that folder as `base_model` in `config.json`.
-
-Links:
-
-- Hugging Face: https://huggingface.co/BAAI/bge-m3
-- ModelScope: https://modelscope.cn/models/BAAI/bge-m3
-
-Do not place the base model inside the adapter folder.
-
-## 5. Install the Mdlr Generation Model
-
-Download the Mdlr model from [TTT-rfk/Mdlr1.0-Qwen2.5-3B](https://github.com/TTT-rfk/Mdlr1.0-Qwen2.5-3B). Its README links the public ModelScope files:
-
-- Q8_0 GGUF, about 3.3 GB, recommended on most consumer GPUs.
-- F16 GGUF, about 6.2 GB, higher disk and VRAM use.
-
-Install Ollama, start it, then use the `Modelfile` from that repository to import the downloaded GGUF. From the folder containing the model repository's `Modelfile` and GGUF file, run:
-
-```powershell
-ollama create Mdlr1.0-Qwen2.5-3B -f Modelfile
-ollama run Mdlr1.0-Qwen2.5-3B
-```
-
-Set `generation_model` in `config.json` to the exact tag printed by `ollama list`. The default expected tag is:
-
-```text
-Mdlr1.0-Qwen2.5-3B:f16
-```
-
-If you have a GGUF model file, import it with a Modelfile supplied by the model distributor. Do not claim a model is installed until this command lists it:
-
-```powershell
-ollama list
-```
-
-## 6. Run Automatic Configuration
-
-After BGE-M3 is in `assets\BAAI-bge-m3` and the Mdlr model is imported into Ollama, run:
+Open PowerShell in this directory and run:
 
 ```powershell
 .\setup_mldrh.ps1
 ```
 
-The script installs Python dependencies, downloads the verified MldrH `v1.0.0` database Release asset, extracts it, writes `config.json`, and verifies collection `theory_knowledge` contains 5659 entries.
+The script creates `.venv`, installs dependencies, downloads public base models, downloads the matching v1.1 PT-only database Release asset, writes `config.json`, and verifies the collection.
 
-## 7. Included Theory Knowledge Base
+## Manual Setup
 
-The current MldrH database is distributed as the `MldrH-theory-knowledge-db-v1.zip` asset attached to the [MldrH v1.0.0 Release](https://github.com/TTT-rfk/MldrH/releases/tag/v1.0.0). It contains collection `theory_knowledge` with 5659 theory chunks and is built for the bundled Mdlr embedding adapter. Do not substitute the older `theory_docs` database from `Mdlr1.0-Qwen2.5-3B-vector-db`.
+1. Create a Python environment and install requirements:
 
-## 8. Launch
+```powershell
+py -3.11 -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+```
 
-Double-click:
+2. Download public base models:
+
+- Retrieval base: [BAAI/bge-m3](https://modelscope.cn/models/BAAI/bge-m3)
+- Generation base: [Qwen/Qwen2.5-3B-Instruct](https://modelscope.cn/models/Qwen/Qwen2.5-3B-Instruct)
+
+3. Download `MldrH-theory-knowledge-db-v1.1.0.zip` from the matching GitHub Release, extract it in this folder, and verify it contains `knowledge_db_theory_v1\chroma.sqlite3`.
+
+4. Copy `config.example.json` to `config.json`. The default relative paths work when all assets remain in the release folder.
+
+5. Launch:
 
 ```text
 MldrH.bat
 ```
 
-or run it from PowerShell:
+## Terminal Controls
 
-```powershell
-.\MldrH.bat
-```
-
-## Troubleshooting
-
-| Error | Meaning | Action |
-|---|---|---|
-| `E01` | Ollama is unavailable. | Start Ollama and verify `http://localhost:11434/api/tags` opens. |
-| `E02` | The configured Mdlr model is unavailable. | Check `ollama list`, then import or use the correct model tag. |
-| `E03` | A local model, adapter, prompt, or database asset is missing. | Check `config.json` and the required folder paths. |
-| `E04` | A generation request failed. | Retry once, then inspect Ollama logs and GPU memory. |
+- Enter: submit a question or slash command.
+- Alt+Enter: insert a newline.
+- Ctrl+C: stop current Think or Answer generation safely.
+- Ctrl+L: clear current local session.
+- Ctrl+T: toggle Think mode.
+- `/clear`: clear local session and terminal display.
 
 ## Security
 
-Never put API keys, tokens, passwords, private training data, or personal documents in this folder before publishing it.
+Never add credentials, raw source corpora, staged vectors, logs, or `config.json` to a public release.
